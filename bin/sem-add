@@ -34,6 +34,6 @@ end
 
 puts "Adding #{target}"
 SchemaEvolutionManager::Library.system_or_error("mv #{file} #{target}")
-SchemaEvolutionManager::Library.system_or_error("git add #{target}")
+SchemaEvolutionManager::Library.system_or_error("hg add #{target}")
 
-puts "File staged in git. You need to commit and push"
+puts "File staged in mercurial hg. You need to commit and push"

@@ -1,18 +1,17 @@
 To add a new database migration script:
 
   1. Make sure you have head of master:
-     git checkout master
-     git fetch
-     git rebase origin/master
+     hg pull
+     hg update
 
   2. Create a local branch for your change
-     git checkout -b tmp
+     hg checkout -b tmp
 
   3. Create a file containing your upgrade script - e.g. new.sql
 
   4. Add your upgrade script
      %%add_script_path%% ./new.sql
-     git commit -m 'Add upgrade script to ...' scripts
+     hg commit -m 'Add upgrade script to ...' scripts
 
   5. Push change
 
