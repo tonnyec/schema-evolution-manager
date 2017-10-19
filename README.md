@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/mbryzek/schema-evolution-manager.svg?branch=master)](https://travis-ci.org/mbryzek/schema-evolution-manager)
 
-# Schema Evolution Manager (sem)
+# Schema Evolution Manager (sem) Mercurial HG version
 
 ## Intended Audience
 
@@ -15,7 +15,7 @@
 Schema Evolution Manager (sem) makes it very simple for engineers to
 contribute schema changes to a postgresql database, managing the
 schema evolutions as proper source code. Schema changes are deployed
-as gzipped tarballs named with the corresponding git tag.
+as gzipped tarballs named with the corresponding hg tag.
 
 To apply schema changes to a particular database, download a tarball
 and use sem to figure out which scripts have not yet been
@@ -33,7 +33,7 @@ environments.
    see what has been applied, and when, if needed.
 
 sem contains only tools for managing schema evolutions. The idea is
-that you create one git repository for each of your databases then use
+that you create one hg repository for each of your databases then use
 sem to manage the schema evolution of each database.
 
 At Gilt Groupe, we started using sem in early 2012 and have observed
@@ -119,7 +119,7 @@ First presented at [PGDay NYC 2013](https://speakerdeck.com/mbryzek/schema-evolu
 
   [createlang plpgsql template1](http://www.postgresql.org/docs/8.4/static/app-createlang.html)
 
-- Git: Designed to use git for history (all versions since 1.7).
+- Mercurial hg: Designed to use hg for history (all versions since 1.7).
 
 ## Installation
 
@@ -127,7 +127,7 @@ There are two ways to install schema evolution manager:
 
 1. Direct install using ruby (no dependency on ruby gems)
 
-        git clone git://github.com/mbryzek/schema-evolution-manager.git
+        git clone git://github.com/tonnyec/schema-evolution-manager.git
         cd schema-evolution-manager
         git checkout 0.9.35
         ruby ./configure.rb
@@ -150,7 +150,7 @@ version.
 
 ### Initialization
 
-    git init /tmp/sample
+    hg init /tmp/sample
     sem-init --dir /tmp/sample --url postgresql://postgres@localhost/sample
 
 ### Writing your first sql script
@@ -175,33 +175,7 @@ Similarly, for non-standard setups, you can optionally pass in the port
 
 ### When you are happy with your change, commit:
 
-    git commit -m "Adding a new tmp table to test sem process" scripts
-
-## Publishing a Release
-
-    cd /tmp/sample
-    sem-dist
-
-By default, the sem-dist script will create the next micro git tag,
-and use that tag in the file name.
-
-If you already have a tag:
-
-    sem-dist --tag 0.0.2
-
-You will now have a single artifict -
-/tmp/sample/dist/sample-0.0.2.tar.gz - that you can manage in standard
-deploy process.
-
-
-## Deploying Schema Changes
-
-### Extract tarball on server
-
-    scp /tmp/sample/dist/sample-0.0.2.tar.gz <your server>:~/
-    ssh <your server>
-    tar xfz sample-0.0.2.tar.gz
-    cd sample-0.0.2
+    hg commit -m "Adding a new tmp table to test sem process" scripts
 
 ### Do a dry run
 
@@ -304,7 +278,7 @@ and utilities in practice.
 
 ## Command Line Utilities
 
-- sem-init: Initialize a git repository for sem support
+- sem-init: Initialize a hg repository for sem support
 - sem-add: Adds a database upgrade script
 - sem-dist: Create a distribution tar.gz file containing schema upgrade scripts
 - sem-apply: Apply any deltas from a distribution tarball to a particular database
